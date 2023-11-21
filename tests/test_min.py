@@ -74,3 +74,14 @@ def test_min_fails_length():
     check.value = [1, 2, 3]
     assert not check.result
     assert check.error is not None
+
+
+def test_min_error_invalid_type():
+    """
+    Test that the rule fails if attempting to validate a type that can not be compared
+    used the >= operator
+    """
+
+    r = Min(5, value=int)
+    assert not r.result
+    assert r.error is not None
