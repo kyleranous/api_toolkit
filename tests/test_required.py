@@ -28,6 +28,10 @@ def test_required_passes():
     assert check.result
     assert check.error is None
 
+    check = required(value=0)
+    assert check.result
+    assert check.error is None
+
 def test_required_fails():
     """
     Test that required fails when it should

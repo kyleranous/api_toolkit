@@ -21,6 +21,9 @@ def test_min_passes_numbers():
     assert check.result
     assert check.error is None
 
+    check = Min(4.9, value=5)
+    assert check.result
+    assert check.error is None
 
 def test_min_passes_length():
     """

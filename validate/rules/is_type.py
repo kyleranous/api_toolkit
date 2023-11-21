@@ -8,9 +8,9 @@ class IsType(Rule):
     """
     Maybe
     """
-    def __init__(self, *args: object) -> None:
+    def __init__(self, *args: object, **kwargs) -> None:
         self.type_list = args
-        super().__init__()
+        super().__init__(**kwargs)
 
     def check(self):
         """

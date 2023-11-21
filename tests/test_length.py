@@ -25,6 +25,12 @@ def test_length_passes():
     assert check.result
     assert check.error is None
 
+    check = length(min=1, max=200)
+    assert not check.result
+
+    check = length(min=1, max=200, value=[1, 2, 3])
+    assert check.result
+    assert check.error is None
 
 def test_length_fails():
     """

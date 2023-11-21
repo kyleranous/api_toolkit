@@ -21,6 +21,10 @@ def test_max_passes_numbers():
     assert check.result
     assert check.error is None
 
+    check = Max(5, value=4.9)
+    assert check.result
+    assert check.error is None
+
 
 def test_max_passes_length():
     """

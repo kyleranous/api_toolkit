@@ -12,9 +12,9 @@ class NoEmoji(Rule):
     Rule that validates that a string has no Emoji's in it
     """
 
-    def __init__(self) -> None:
+    def __init__(self, **kwargs) -> None:
         self.message = None
-        super().__init__()
+        super().__init__(**kwargs)
 
     def check(self) -> None:
         """
@@ -22,7 +22,7 @@ class NoEmoji(Rule):
         """
         analysis = list(emoji.analyze(self.value))
         if bool(analysis):
-            self.message = f'No Emoji Error: {self.value} has Emoji\'s in it'
+            self.message = f"No Emoji Error: {self.value} has Emoji's in it"
             self.result = False
         else:
             self.message = None
