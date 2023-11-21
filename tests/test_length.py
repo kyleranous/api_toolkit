@@ -1,7 +1,7 @@
 """
 Test the length class
 """
-
+import pytest
 from validate.rules import length
 
 
@@ -56,3 +56,11 @@ def test_length_fails():
     check.value = 1
     assert not check.result
     assert check.error == "Attribute Error: 1 does not have a length"
+
+
+def test_length_raises_error_missing_values():
+    """
+    Test that Length will raise a type error if both 
+    """
+    with pytest.raises(TypeError):
+        _ = length()
