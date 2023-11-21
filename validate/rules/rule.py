@@ -6,14 +6,20 @@ class Rule:
     """
     Base class for rules
     """
-    def __init__(self) -> None:
+    def __init__(self, **kwargs) -> None:
         self.error = None
         self._result = False
         self.modified_result = None
-        self._value = None
+        self._value = kwargs.get('value', None)
 
     def __bool__(self) -> bool:
         return self.result
+
+    def __str__(self) -> str:
+        if self.result:
+            return "Valid"
+
+        return self.error
 
     def check(self) -> None:
         """

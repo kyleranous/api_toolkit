@@ -70,8 +70,3 @@ This project is licensed under the XYZ License - see the [LICENSE.md](LICENSE.md
  - [x] no_emoji
  - [x] pattern
  - [x] email
-
-## ToDo
- - [x] Refactor rules to take value as an optional argument, define value in Rule base class and build setter to run check() when the value is set instead of on initialization. Setter should also reset the error message and set result back to false before running check to allow the same rule definition to be used multiple times
- - [ ] Wrap `check()` in a try except block to deal with a catch all for errors. If `check()` throws an error, then result should be set to false and the error should be set as the error message
- - [ ] Length needs a check to make sure at least one (min or max) is set
