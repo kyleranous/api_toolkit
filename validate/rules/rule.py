@@ -11,8 +11,8 @@ class Rule:
         self._result = False
         self.modified_result = None
         self._value = None
-        if kwargs.get('value'):
-            self.value = kwargs.get("value")
+        if kwargs.get('value') is not None:
+            self.value = kwargs.get('value')
 
     def __bool__(self) -> bool:
         return self.result
