@@ -11,9 +11,9 @@ class Email(Rule):
     Class that validates that a value is formatted properly as an email
     """
 
-    def __init__(self) -> None:
+    def __init__(self, **kwargs) -> None:
         self.message = None
-        super().__init__()
+        super().__init__(**kwargs)
 
     def check(self) -> None:
         """

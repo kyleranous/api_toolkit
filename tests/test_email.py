@@ -15,6 +15,11 @@ def test_email_passes():
     assert check.result
     assert check.error is None
 
+    # Test that email passes when passed a valid email in initialization
+    check = email(value="test@test.com")
+    assert check.result
+    assert check.error is None
+
 
 def test_email_fails():
     """

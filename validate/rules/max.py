@@ -10,10 +10,10 @@ class Max(Rule):
     Class that validates a value is less then the specified maximum
     """
 
-    def __init__(self, max_value: int | float) -> None:
+    def __init__(self, max_value: int | float, **kwargs) -> None:
         self.max = max_value
         self.message = None
-        super().__init__()
+        super().__init__(**kwargs)
 
     def check(self):
         """

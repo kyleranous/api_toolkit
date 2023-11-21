@@ -10,10 +10,10 @@ class Min(Rule):
     Class that validates a value is greater than or equal to a specified minimum
     """
 
-    def __init__(self, min_value: int | float) -> None:
+    def __init__(self, min_value: int | float, **kwargs) -> None:
         self.min = min_value
         self.message = None
-        super().__init__()
+        super().__init__(**kwargs)
 
     def check(self):
         """

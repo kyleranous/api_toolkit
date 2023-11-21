@@ -13,6 +13,7 @@ def test_rule_init():
     assert r.error is None
     assert not r.result
 
+
 def test_rule_custom_dunders():
     """
     Test that overwritten dunder methods work as expected

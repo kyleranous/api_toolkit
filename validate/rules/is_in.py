@@ -1,3 +1,6 @@
+"""
+Class module for is_type rule check
+"""
 from .rule import Rule
 
 
@@ -6,9 +9,9 @@ class IsIn(Rule):
     Class module for IsIn validation check
     """
 
-    def __init__(self, validation_list: list) -> None:
+    def __init__(self, validation_list: list, **kwargs) -> None:
         self.validation_list = validation_list
-        super().__init__()
+        super().__init__(**kwargs)
 
     def check(self):
         """

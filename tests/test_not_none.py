@@ -20,6 +20,10 @@ def test_not_none_valid():
     assert r
     assert r.error is None
 
+    r = not_none(value=1)
+    assert r
+    assert r.error is None
+
 
 def test_non_none_invalid():
     """

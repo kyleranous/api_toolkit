@@ -12,10 +12,10 @@ class Pattern(Rule):
     the pattern
     """
 
-    def __init__(self, pattern: str) -> None:
+    def __init__(self, pattern: str, **kwargs) -> None:
         self.pattern = pattern
         self.message = None
-        super().__init__()
+        super().__init__(**kwargs)
 
     def check(self) -> None:
         """
@@ -27,7 +27,7 @@ class Pattern(Rule):
         else:
             self.message = None
             self.result = True
-    
+
     def _build_error_message(self) -> None:
         """
         Build the error message if the check fails

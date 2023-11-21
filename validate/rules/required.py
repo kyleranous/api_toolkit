@@ -10,9 +10,9 @@ class Required(Rule):
     or an Empty String
     """
 
-    def __init__(self) -> None:
+    def __init__(self, **kwargs) -> None:
         self.message = None
-        super().__init__()
+        super().__init__(**kwargs)
 
     def check(self):
         """

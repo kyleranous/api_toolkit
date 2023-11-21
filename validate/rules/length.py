@@ -14,7 +14,7 @@ class Length(Rule):
         self.min = kwargs.get('min')
         self.max = kwargs.get('max')
         self.message = None
-        super().__init__()
+        super().__init__(**kwargs)
 
     def check(self):
         """

@@ -19,3 +19,7 @@ def test_no_emoji_valid():
     r.value = 'test😀'
     assert not r.result
     assert r.error is not None
+
+    r = no_emoji(value='test')
+    assert r.result
+    assert r.error is None

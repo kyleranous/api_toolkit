@@ -12,6 +12,10 @@ def test_is_in():
     assert check.result
     assert check.error is None
 
+    check = is_in(valid_values, value='on')
+    assert check.result
+    assert check.error is None
+
 def test_is_type_fails():
     """
     Test that is_in rule returns false for invalid values

@@ -19,6 +19,10 @@ def test_pattern_valid():
     assert r.result
     assert r.error is None
 
+    r = pattern(r'^[a-z]{4}$', value='test')
+    assert r.result
+    assert r.error is None
+
 
 def test_pattern_invalid():
     """

@@ -13,6 +13,10 @@ def test_is_type():
     assert check.result
     assert check.error is None
 
+    check = is_type(int, float, value=1.0)
+    assert check.result
+    assert check.error is None
+
 def test_is_type_fails():
     """
     Test that a failure is recorded correctly
