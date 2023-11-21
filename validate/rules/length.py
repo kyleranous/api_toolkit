@@ -13,6 +13,10 @@ class Length(Rule):
     def __init__(self,**kwargs) -> None:
         self.min = kwargs.get('min')
         self.max = kwargs.get('max')
+
+        if self.min is None and self.max is None:
+            raise TypeError('Length Rule requires at least one of min or max to be set')
+
         self.message = None
         super().__init__(**kwargs)
 
