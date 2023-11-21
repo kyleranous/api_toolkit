@@ -75,3 +75,12 @@ def test_max_fails_length():
     check.value = [1, 3, 3]
     assert not check.result
     assert check.error is not None
+
+
+def test_max_error_invalid_type():
+    """
+    Test that the rule fails with invalid types
+    """
+    check = Max(5, value=int)
+    assert not check.result
+    assert check.error is not None
