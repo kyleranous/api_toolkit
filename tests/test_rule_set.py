@@ -41,3 +41,46 @@ def test_rule_set_initialization():
 
     rule_set.test_dict = TEST_DICT
     assert rule_set.unvalidated_keys == ['key6']
+
+
+def test_rule_set_valid_payload():
+    """
+    Test that a valid payload returns True
+    """
+    validation_rules = {
+        'key1': [r.is_type(str)],
+        'key2': [r.Min(4)],
+        'key3': [r.Max(11)],
+        'key4': [r.length(min=2, max=3)],
+        'key5': [r.is_type(bool)],
+        'key7': [r.email()]
+    }
+
+    rule_set = RuleSet(validation_rules, test_dict=TEST_DICT)
+
+    assert bool(rule_set)
+    assert not rule_set.errors
+
+
+def test_rule_set_invalid_payload():
+    """
+    Test that an invalid payload returns False and populates errors as expected
+    """
+
+    assert False
+
+
+def test_nested_rule_set_passes():
+    """
+    Test that a nested ruleset works as expected
+    """
+
+    assert False
+
+
+def test_nested_rule_set_fails():
+    """
+    Test that a nested ruleset works as expected
+    """
+
+    assert False
