@@ -44,6 +44,7 @@ class RuleSet:
         """
         self._test_dict = value
         self._build_unvalidated_keys()
+        self._validate()
 
     def _validate(self) -> None:
         """
@@ -105,7 +106,10 @@ class RuleSet:
         """
         # Reset unvalidated_keys
         self.unvalidated_keys = []
+        # Validate that a test dict has been passed
         if self.test_dict is not None:
+            # Loop through each key in the test dict
+            # and check if it exists in the validation dict
             for key in self.test_dict.keys():
                 if key not in self.validation_dict.keys():
                     self.unvalidated_keys.append(key)
