@@ -32,3 +32,19 @@ def test_default_error_msg():
     assert r.error is None
     r.result = False
     assert r.error == "Rule Validation Error"
+
+
+def test_string_dunder():
+    """
+    Test that __str__ returns the expected results
+    """
+
+    r = Rule()
+    r.result = True
+
+    assert str(r) == 'Valid'
+
+    r.result = False
+    r.error = "There was an Error"
+
+    assert str(r) == 'There was an Error'
