@@ -85,3 +85,16 @@ def test_min_error_invalid_type():
     r = Min(5, value=int)
     assert not r.result
     assert r.error is not None
+
+
+def test_min_string_passed():
+    """
+    Test that max runs if a string gets passed for the max value
+    """
+    check = Min('5')
+    check.value = 6
+    assert check.result
+
+    check = Min('5.4')
+    check.value = 5.5
+    assert check.result

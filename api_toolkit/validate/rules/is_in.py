@@ -9,8 +9,8 @@ class IsIn(Rule):
     Class module for IsIn validation check
     """
 
-    def __init__(self, validation_list: list, **kwargs) -> None:
-        self.validation_list = validation_list
+    def __init__(self, *args, **kwargs) -> None:
+        self.validation_list = args
         super().__init__(**kwargs)
 
     def check(self):

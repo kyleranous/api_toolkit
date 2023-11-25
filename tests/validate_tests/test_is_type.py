@@ -30,3 +30,20 @@ def test_is_type_fails():
     check.value = 1
     assert not check.result
     assert check.error == "Type Error: Expected type in ['str', 'float'] got int"
+
+
+def test_is_type_string():
+    """
+    Test that if a string is passed, is_type successfully 
+    converts it to the correct type
+    """
+
+    check = is_type('int')
+    check.value = 1
+    assert check.result
+    assert check.error is None
+
+    check = is_type('int', 'float')
+    check.value = 1.0
+    assert check.result
+    assert check.error is None

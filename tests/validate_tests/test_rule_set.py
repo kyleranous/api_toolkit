@@ -188,3 +188,38 @@ def test_multiple_checks_per_field_fails():
     assert rule_set.errors
     assert len(rule_set.errors['key1']) == 1
     assert len(rule_set.errors['key2']) == 2
+
+
+def test_rule_set_with_string():
+    """
+    Test that a ruleset defined with a string works as expected
+    """
+
+    validation_dict = {
+        'key1': 'is_type|str|int|float',
+        'key2': 'required,length|min:2|max:5'
+    }
+
+    test_dict = {
+        'key1': 'Hello World!',
+        'key2': 'Test'
+    }
+
+    test_dict2 = {
+        'key1': 5,
+        'key2': 'Test'
+    }
+
+    test_dict3 = {
+        'key1': 5.5,
+        'key2': 'Test'
+    }
+
+    rule_set = RuleSet(validation_dict, test_dict=test_dict)
+    assert rule_set
+
+    rule_set.test_dict = test_dict2
+    assert rule_set
+
+    rule_set.test_dict = test_dict3
+    assert rule_set

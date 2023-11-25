@@ -13,7 +13,6 @@ class RuleSet:
     Class for containing a set of rules for validating a given input.
     """
 
-
     def __init__(self, validation_dict: dict, **kwargs) -> None:
         self.validation_dict = validation_dict
         self.result = False
@@ -55,6 +54,8 @@ class RuleSet:
         # Loop through each key and value in the validation dict
         for key, rules in self.validation_dict.items():
             # Pass the rule list and the value to the _validate_key method
+            if isinstance(rules, str):
+                rules = self.parse_rule_string(rules)
             self._validate_key(key, rules)
 
         # If there are any errors, set result to false
@@ -79,11 +80,6 @@ class RuleSet:
                 # Add the errors to the errors dict
                 self.errors[key] = rules.errors
             return
-
-        # Check if rules is a string or a list of functions
-        if isinstance(rules, str):
-            # If it is a string, convert it to a list
-            pass
 
         # Get the value from the test dict
         value = self.test_dict.get(key)
@@ -126,3 +122,34 @@ class RuleSet:
             rule_dict[rule[0]] = rule[1]
 
         return rule_dict
+
+    def parse_rule_string(self, rule_string: str) -> list:
+        """
+        comma separates rules, | seperates rule and arguments, : seperates arguments from values
+
+        example:
+        'required,type|int|float'
+        """
+
+        # Split the rule string into a list
+        rules = rule_string.split(',')
+        rule_list = []
+        # Loop throug each Rule and parse the arguments
+        for _r in rules:
+            # Split the rule and arguments
+            rule_format = _r.split('|')
+            rule = self._rule_dict.get(rule_format[0])
+
+            # Parse the arguments
+            kwargs = {}
+            args = []
+            for arg in rule_format[1:]:
+                if ':' in arg:
+                    arg = arg.split(':')
+                    kwargs[arg[0]] = arg[1]
+                else:
+                    args.append(arg)
+
+            rule_list.append(rule(*args, **kwargs))
+
+        return rule_list

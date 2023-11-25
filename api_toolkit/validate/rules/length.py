@@ -17,6 +17,10 @@ class Length(Rule):
         if self.min is None and self.max is None:
             raise TypeError('Length Rule requires at least one of min or max to be set')
 
+        if isinstance(self.min, str):
+            self.min = int(self.min)
+        if isinstance(self.max, str):
+            self.max = int(self.max)
         self.message = None
         super().__init__(**kwargs)
 
