@@ -1,6 +1,6 @@
-# Validate
+# API Toolkit
 
-Short project description goes here.
+A collection of tools for creating APIs and API Connectors
 
 ## Getting Started
 
@@ -52,11 +52,11 @@ See also the list of [contributors](https://github.com/your/project/contributors
 
 ## License
 
-This project is licensed under the XYZ License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
-* This package was heavily influinced by [validator](https://pypi.org/project/validator/)
+* This package was influinced by [validator](https://pypi.org/project/validator/)
 * 
 
 ## Rules

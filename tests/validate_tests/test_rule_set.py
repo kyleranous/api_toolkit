@@ -2,8 +2,8 @@
 Module to test the RuleSet class
 """
 
-from validate import RuleSet
-from validate import Rules as r
+from api_toolkit.validate import RuleSet
+from api_toolkit.validate import Rules as r
 
 
 TEST_DICT = {

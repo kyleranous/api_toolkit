@@ -2,7 +2,7 @@
 Test the length class
 """
 import pytest
-from validate.rules import length
+from api_toolkit.validate.rules import length
 
 
 def test_length_passes():

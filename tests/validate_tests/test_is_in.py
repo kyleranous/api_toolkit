@@ -1,4 +1,4 @@
-from validate.rules import is_in
+from api_toolkit.validate.rules import is_in
 
 
 def test_is_in():

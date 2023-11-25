@@ -1,7 +1,7 @@
 """
 Test the IsType class
 """
-from validate.rules import is_type
+from api_toolkit.validate.rules import is_type
 
 def test_is_type():
     """

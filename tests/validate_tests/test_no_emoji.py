@@ -2,7 +2,7 @@
 Test the no_emoji rule class
 """
 
-from validate.rules import no_emoji
+from api_toolkit.validate.rules import no_emoji
 
 
 def test_no_emoji_valid():

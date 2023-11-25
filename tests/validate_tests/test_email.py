@@ -2,7 +2,7 @@
 Test the email class rule
 """
 
-from validate.rules import email
+from api_toolkit.validate.rules import email
 
 
 def test_email_passes():

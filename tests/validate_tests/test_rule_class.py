@@ -2,7 +2,7 @@
 Tests for the rule base class
 """
 
-from validate.rules.rule import Rule
+from api_toolkit.validate.rules.rule import Rule
 
 
 def test_rule_init():

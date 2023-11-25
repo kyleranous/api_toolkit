@@ -2,7 +2,7 @@
 Tests for the required rule
 """
 
-from validate.rules import required
+from api_toolkit.validate.rules import required
 
 def test_required_passes():
     """

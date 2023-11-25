@@ -2,7 +2,7 @@
 Test that pattern rule class
 """
 
-from validate.rules import pattern
+from api_toolkit.validate.rules import pattern
 
 def test_pattern_valid():
     """

@@ -2,7 +2,7 @@
 Test the no_none rule class
 """
 
-from validate.rules import not_none
+from api_toolkit.validate.rules import not_none
 
 
 def test_not_none_valid():
