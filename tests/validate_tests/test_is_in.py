@@ -7,12 +7,12 @@ def test_is_in():
     """
     valid_values = ['on', 'off', 'yes', 'no']
 
-    check = is_in(valid_values)
+    check = is_in(*valid_values)
     check.value = 'on'
     assert check.result
     assert check.error is None
 
-    check = is_in(valid_values, value='on')
+    check = is_in(*valid_values, value='on')
     assert check.result
     assert check.error is None
 
@@ -23,8 +23,8 @@ def test_is_type_fails():
     """
     valid_values = ['on', 'off', 'yes', 'no']
 
-    check = is_in(valid_values)
+    check = is_in(*valid_values)
     check.value = 'maybe'
     assert not check.result
-    assert check.error == "Value Error: maybe not in ['on', 'off', 'yes', 'no']"
+    assert check.error == "Value Error: maybe not in ('on', 'off', 'yes', 'no')"
     

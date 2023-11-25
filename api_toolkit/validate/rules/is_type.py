@@ -2,7 +2,10 @@
 Class module for is_type rule check
 """
 
+from .. import utils
+
 from .rule import Rule
+
 
 class IsType(Rule):
     """
@@ -10,6 +13,15 @@ class IsType(Rule):
     """
     def __init__(self, *args: object, **kwargs) -> None:
         self.type_list = args
+        # Check if the type_list has strings
+        temp_list = []
+        for _type in self.type_list:
+            if isinstance(_type, str):
+                temp_list.append(utils._string_to_type(_type))
+            else:
+                temp_list.append(_type)
+        if len(temp_list) > 0:
+            self.type_list = temp_list
         super().__init__(**kwargs)
 
     def check(self):

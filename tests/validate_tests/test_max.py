@@ -84,3 +84,16 @@ def test_max_error_invalid_type():
     check = Max(5, value=int)
     assert not check.result
     assert check.error is not None
+
+
+def test_max_string_passed():
+    """
+    Test that max runs if a string gets passed for the max value
+    """
+    check = Max('5')
+    check.value = 4
+    assert check.result
+
+    check = Max('5.4')
+    check.value = 5.3
+    assert check.result
