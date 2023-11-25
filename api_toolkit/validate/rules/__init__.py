@@ -8,3 +8,4 @@ from .not_none import NotNone as not_none
 from .no_emoji import NoEmoji as no_emoji
 from .pattern import Pattern as pattern
 from .email import Email as email
+from .custom_rule import CustomRule as custom
