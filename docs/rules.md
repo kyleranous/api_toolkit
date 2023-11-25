@@ -31,7 +31,8 @@
 ## required
 
 ## custom
-*Note* custom rule can not be set using the string method of setting up a RuleSet
+*Note* custom rule can not be set using the string method of setting up a RuleSet.
+
 **Passing a lambda function to `custom`**
 ```python
 >>> from api_toolkit.validate.rules import custom
