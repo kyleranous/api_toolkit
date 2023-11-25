@@ -29,6 +29,18 @@ class RuleSet:
     def __bool__(self) -> bool:
         return self.result
 
+    def __len__(self) -> int:
+        return len(self.errors)
+
+    def __getitem__(self, key: str) -> list:
+        return self.errors.get(key, self.__missing__(key))
+
+    def __missing__(self, key: str) -> str:
+        return f'No errors for {key}'
+
+    def __iter__(self) -> iter:
+        return iter(self.errors.items())
+
     @property
     def test_dict(self) -> dict:
         """
