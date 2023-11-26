@@ -64,3 +64,12 @@ def test_length_raises_error_missing_values():
     """
     with pytest.raises(TypeError):
         _ = length()
+
+
+def test_length_callable():
+    """
+    Test that length is callable
+    """
+
+    assert length(min=3, max=10, value='test')
+    assert not length(min=6, max=10, value='test')
