@@ -132,8 +132,36 @@ True
 ```
 
 ## Max
+Max compares the value against a maximum and returns false if the value passed is greater then Max.
+If a number is passed as the value, Max does a `<=` comparitor. If an object with a `__len__` attribute is passed to it, it will compare the length of the object.
+
+```python
+>>> from api_toolkit.validate import Rules as r
+>>>
+>>> test_max = r.Max(18)
+>>> test_max.value = 15
+>>> test_max.result
+True
+>>> test_max.value = 'Hello World!'
+>>> test_max.result
+True
+```
 
 ## Min
+Min compares the value agains a minimum and returns false if the value passed is less then Min.
+If a number is passed as the value, Min does a `>=` comparitor. If an object with a `__len__` attribute is passed, it will compare the length of the object.
+
+```python
+>>> from api_toolkit.validate import Rules as r
+>>>
+>>> test_min = r.Min(4)
+>>> test_min.value = 5
+>>> test_min.result
+True
+>>> test_min.value = 'This is at least 4 chars'
+>>> test_min.result
+True
+```
 
 ## no_emoji
 
