@@ -1,5 +1,7 @@
 # Rules
-Information about specific rules. See the section on [RuleSet]() for information on using them in payloads
+Information about specific rules. See the section on [RuleSet]() for information on using them in payloads.
+
+
 ## Rule List
  - [email()](#email)
  - [is_in()](#is_in)
@@ -15,8 +17,10 @@ Information about specific rules. See the section on [RuleSet]() for information
 
 ## email
 Simple check to validate a string has a valid email format.
-Returns `True` if the string matches the following regex: `^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$`
-*Note* this check is a simple check to verify that a string is formatted as a valid email address and does not check if the email address is valid. This check may also fail if dealing with email addresses with complex subdomains.
+Returns `True` if the string matches the following regex: `^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$`. If you want to use a different pattern to check emails see [pattern()](#pattern)
+
+
+*Note* this is a simple check to verify that a string is formatted as a valid email address and does not check if the email address is valid. This check may also fail if dealing with email addresses with complex subdomains.
 
 Use:
 ```python
@@ -92,6 +96,40 @@ Validation Fail Message:
 `Type Error: Expected type [LIST OF TYPES] got [VALUE TYPE]`
 
 ## length
+Checks if the pass value has a length over a minimum value and under a maximum value. Will work on any object with a `__len__` attribute (strings, list, dictionaries, etc)
+
+**Arguments**
+ - min - *optional* `int` Minimum length of the object (inclusive)
+ - max - *optional* `int` Maximum length of the object (invlusive)
+
+ *Note* While both `min` and `max` arguements are optional, at least one must be set.
+
+ If only one is set, `value` will be compared against just that
+
+Use:
+```python
+>>> from api_toolkit.validate import Rules as r
+>>>
+>>> length_check = r.length(min=2, max=2)
+>>> length_check.value = 'USA'
+>>> length_check.result
+False
+>>> length_check.error
+"Length Error: USA is not between 2 and 2
+>>> length_check,value = 'US'
+>>> length_check.result
+True
+```
+
+The length rule can also be used as a callable function without instantiating it. When using this method it will return only `True` or `False` and no error message.
+
+```python
+>>> from api_toolkit.validate import Rules as r
+>>>
+>>> test_array = [1, 2, 3, 4, 5]
+>>> r.length(min=3, max=6, value=test_array)
+True
+```
 
 ## Max
 
