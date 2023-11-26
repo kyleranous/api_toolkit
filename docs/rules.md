@@ -32,7 +32,7 @@ True
 >>> bool(check_email)
 False
 ```
-The Email rule can also be used as a callable function without instantiating it. When using this method it will return only `True` or `False` and no error message
+The email rule can also be used as a callable function without instantiating it. When using this method it will return only `True` or `False` and no error message
 
 ```python
 from api_toolkit.validate import Rules as r
@@ -66,6 +66,26 @@ Validation Fail Message:
 `Value Error: [PASSED VALUE] not in (PASSED LIST)`
 
 ## is_type
+Checks if the passed value is a specific type. A list of types can be passed to the rule.
+
+Use:
+```python
+>>> from api_toolkit.validate import Rules as r
+>>>
+>>> check_type = r.is_type(int, float)
+>>> check_type.value = 1.3
+>>> check_type.result
+True
+```
+
+The `is_type` rule can also be used as a callable function without instantiating it. When using this method it will return only `True` or `False` and no error message
+
+```python
+from api_toolkit.validate import Rules as r
+>>>
+>>> r.is_type(str, int, value='1')
+True
+```
 
 ## length
 
