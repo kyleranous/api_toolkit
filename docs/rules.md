@@ -1,4 +1,6 @@
 # Rules
+Information about specific rules. See the section on [RuleSet]() for information on using them in payloads
+## Rule List
  - [email()](#email)
  - [is_in()](#is_in)
  - [is_type()](#is_type)
@@ -10,7 +12,35 @@
  - [pattern()](#pattern)
  - [required()](#required)
  - [custom()](#custom)
+
 ## email
+Simple check to validate a string has a valid email format. 
+*Note* this check is a simple check to verify that a string is formatted as a valid email address and does not check if the email address is valid.
+
+Uses the following regex to check `^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$`
+
+Use:
+```python
+>>> from api_toolkit.validate import Rules as r
+>>>
+>>> email = 'kranous05@gmail.com'
+>>> check_email = r.email(value=email)
+>>> bool(check_email)
+True
+>>> # Rule can be instatiated then value set later
+>>> check_email2 = r.email()
+>>> check_email2.value = 'invalid@email'
+>>> bool(check_email)
+False
+```
+The Email rule can also be used as a callable function without instantiating it. When using this method it will return only `True` or `False`and no error message
+
+```python
+from api_toolkit.validate import Rules as r
+>>>
+>>> r.email(value='kranous05@gmail.com')
+True
+```
 
 ## is_in
 
