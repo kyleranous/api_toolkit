@@ -2,7 +2,7 @@
 Utility function to convert a string to a type.
 """
 
-def _string_to_type(value: str) -> object:
+def string_to_type(value: str) -> object:
     """
     Convert a string to a type
     """

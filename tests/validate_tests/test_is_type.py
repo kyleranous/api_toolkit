@@ -47,3 +47,12 @@ def test_is_type_string():
     check.value = 1.0
     assert check.result
     assert check.error is None
+
+
+def test_is_type_callable():
+    """
+    Test that is_type can be called as a function
+    """
+
+    assert is_type(int, float, value=1)
+    assert not is_type(int, float, value='1')
