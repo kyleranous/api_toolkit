@@ -87,6 +87,10 @@ from api_toolkit.validate import Rules as r
 True
 ```
 
+Validation Fail Message:
+
+`Type Error: Expected type [LIST OF TYPES] got [VALUE TYPE]`
+
 ## length
 
 ## Max
