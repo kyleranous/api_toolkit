@@ -14,10 +14,9 @@ Information about specific rules. See the section on [RuleSet]() for information
  - [custom()](#custom)
 
 ## email
-Simple check to validate a string has a valid email format. 
-*Note* this check is a simple check to verify that a string is formatted as a valid email address and does not check if the email address is valid.
-
-Uses the following regex to check `^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$`
+Simple check to validate a string has a valid email format.
+Returns `True` if the string matches the following regex: `^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$`
+*Note* this check is a simple check to verify that a string is formatted as a valid email address and does not check if the email address is valid. This check may also fail if dealing with email addresses with complex subdomains.
 
 Use:
 ```python
@@ -33,7 +32,7 @@ True
 >>> bool(check_email)
 False
 ```
-The Email rule can also be used as a callable function without instantiating it. When using this method it will return only `True` or `False`and no error message
+The Email rule can also be used as a callable function without instantiating it. When using this method it will return only `True` or `False` and no error message
 
 ```python
 from api_toolkit.validate import Rules as r
@@ -42,7 +41,29 @@ from api_toolkit.validate import Rules as r
 True
 ```
 
+Validation Fail Message:
+
+`Email Error: [PASSED VALUE] is not a valid email`
+
+
 ## is_in
+Validates that the value of a field is within a specified list.
+
+Use:
+```python
+>>> from api_toolkit.validate import Rules as r
+>>>
+>>> valid_results = ['yes', 'no', True, False]
+>>> # If passing a list to r.is_in(), list must be unpacked with *
+>>> check_valid = r.is_in(*valid_results)
+>>> check_valid.value = 'yes'
+>>> bool(check_valid)
+True
+```
+
+Validation Fail Message:
+
+`Value Error: [PASSED VALUE] not in (PASSED LIST)`
 
 ## is_type
 
