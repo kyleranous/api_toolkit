@@ -209,6 +209,28 @@ False
 True
 ```
 ## pattern
+pattern takes in a regex pattern and matches it against the value. Will pass if the regex pattern matches and will fail if it doesnt.
+
+Use:
+```python
+>>> from api_toolkit.validate import Rules as r
+>>>
+>>> pattern_check = r.pattern(r'^[a-z]+$')
+>>> pattern.value = 'Test'
+>>> pattern.result
+False
+>>> pattern.value = 'test'
+>>> pattern.result
+True
+```
+The pattern rule can also be used as a callable function without instantiating it. When using this method it will return only `True` or `False` and no error message.
+
+```python
+>>> from api_toolkit.validate import Rules as r
+>>>
+>>> r.pattern(pattern=r'^[a-z]+$', value = 'test')
+True
+```
 
 ## required
 
