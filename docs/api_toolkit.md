@@ -2,6 +2,5 @@
 
 ## Modules
  
- - [Connector](connector.md)
- - [Validate](validate.md)
+ - [Validate](validate.md) - Module for validating data
    -  [Rules](rules.md)
