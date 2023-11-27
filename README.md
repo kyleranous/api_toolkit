@@ -6,10 +6,6 @@ A collection of tools for creating APIs and API Connectors
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### Prerequisites
-
-What things you need to install the software and how to install them.
-
 ### Installation
 
 A step by step series of examples that tell you how to get a development environment running.
@@ -33,12 +29,8 @@ Add additional notes about how to deploy this on a live system.
 
 ## Contributing
 
-Details about how to contribute to this project.
-```batch
-$ coverage run -m pytest
-$ coverate report
-```
-Target `>= 90%` Code coverage
+See [Contributing Guidelines](docs/contributing.md)
+
 
 ## Versioning
 
@@ -48,7 +40,6 @@ We use [Semantic Versioning](https://semver.org/) for this project. For the vers
 
 * **Kyle Ranous** - *Initial work* - [kyleranous](https://github.com/kyleranous)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
@@ -57,16 +48,3 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 
 * This package was influinced by [validator](https://pypi.org/project/validator/)
-* 
-
-## Rules
- - [x] is_type - Checks the type of the input against allowed inputs
- - [x] is_in - Checks the value of the input against allowed values
- - [x] required - Verifies that a field is present
- - [x] length - Verifies that the length of the string/array/object is within min/max ranges or over a minimum or under a maximum
- - [x] min
- - [x] max
- - [x] not_none
- - [x] no_emoji
- - [x] pattern
- - [x] email
