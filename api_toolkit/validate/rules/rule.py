@@ -27,6 +27,7 @@ class Rule:
         """
         Extended classes will implement this method to check the specific rule.
         """
+        raise NotImplementedError
 
     def _build_error_message(self) -> None:
         """
