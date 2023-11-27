@@ -252,6 +252,7 @@ False
 ```
 
 ## custom
+the custom Rule allows for passing custom defined validation checks by defining a lambda or function that returns `True` or `False`
 *Note* custom rule can not be set using the string method of setting up a RuleSet.
 
 **Passing a lambda function to `custom`**
