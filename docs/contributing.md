@@ -35,7 +35,7 @@ class NewRule(Rule):
 
 
 ## Versioning
-We use [Semantic Versioning](https://semver.org/) for this project. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
+We use [Semantic Versioning](https://semver.org/) for this project.
 
 Versioning is done by `[MAJOR]-[Minor]-[patch]`:
 - **MAJOR** changes would render ANY of the previous code obsolete.
