@@ -33,3 +33,12 @@ def test_pattern_invalid():
     r.value = 'test'
     assert not r.result
     assert r.error is not None
+
+
+def test_pattern_callable():
+    """
+    Test that pattern rule works when called as a function
+    """
+
+    assert pattern(pattern=r'^[a-z]+$', value='test')
+    assert not pattern(pattern=r'^[0-9]+$', value='test')

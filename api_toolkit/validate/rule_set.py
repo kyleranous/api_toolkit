@@ -98,7 +98,12 @@ class RuleSet:
         # Loop through each rule in the rules list
         field_errors = []
         for rule in rules:
-            rule.value = value
+            # Pass the entire test dict to value if using the Required Rule
+            if type(rule).__name__ == 'Required':
+                rule.key = key
+                rule.value = self.test_dict
+            else:
+                rule.value = value
             if not rule.result: # If the rule validation fails
                 # Add the error to the field_errors list
                 field_errors.append(rule.error)

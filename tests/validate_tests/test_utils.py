@@ -7,19 +7,17 @@ def test_string_to_type():
     """
     Test string to type works as expected
     """
-    # pylint: disable=protected-access
-    assert utils._string_to_type('int') == int
-    assert utils._string_to_type('float') == float
-    assert utils._string_to_type('complex') == complex
-    assert utils._string_to_type('str') == str
-    assert utils._string_to_type('list') == list
-    assert utils._string_to_type('tuple') == tuple
-    assert utils._string_to_type('range') == range
-    assert utils._string_to_type('dict') == dict
-    assert utils._string_to_type('set') == set
-    assert utils._string_to_type('frozenset') == frozenset
-    assert utils._string_to_type('bool') == bool
-    assert utils._string_to_type('bytes') == bytes
-    assert utils._string_to_type('bytearray') == bytearray
-    assert utils._string_to_type('memoryview') == memoryview
-    # pylint: enable=protected-access
+    assert utils.string_to_type('int') == int
+    assert utils.string_to_type('float') == float
+    assert utils.string_to_type('complex') == complex
+    assert utils.string_to_type('str') == str
+    assert utils.string_to_type('list') == list
+    assert utils.string_to_type('tuple') == tuple
+    assert utils.string_to_type('range') == range
+    assert utils.string_to_type('dict') == dict
+    assert utils.string_to_type('set') == set
+    assert utils.string_to_type('frozenset') == frozenset
+    assert utils.string_to_type('bool') == bool
+    assert utils.string_to_type('bytes') == bytes
+    assert utils.string_to_type('bytearray') == bytearray
+    assert utils.string_to_type('memoryview') == memoryview

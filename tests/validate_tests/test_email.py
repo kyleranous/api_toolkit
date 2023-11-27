@@ -30,3 +30,12 @@ def test_email_fails():
     check.value = "test@test"
     assert not check.result
     assert check.error is not None
+
+
+def test_email_callable():
+    """
+    Test that email is callable and functions as expected
+    """
+
+    assert email(value='test@test.com')
+    assert not email(value='test@test')

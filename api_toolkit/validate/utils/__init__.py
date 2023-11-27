@@ -1,1 +1,1 @@
-from ._string_to_type import _string_to_type
+from .string_to_type import string_to_type

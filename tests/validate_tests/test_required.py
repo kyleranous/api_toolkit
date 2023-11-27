@@ -9,28 +9,11 @@ def test_required_passes():
     Tast that required passes when it should
     """
     check = required()
-    check.value = 'test'
+    check.key = 'test'
+    check.value = {'test': 'Hello World'}
     assert check.result
     assert check.error is None
 
-    check = required()
-    check.value = 1
-    assert check.result
-    assert check.error is None
-
-    check = required()
-    check.value = [1]
-    assert check.result
-    assert check.error is None
-
-    check = required()
-    check.value = 0
-    assert check.result
-    assert check.error is None
-
-    check = required(value=0)
-    assert check.result
-    assert check.error is None
 
 def test_required_fails():
     """
@@ -38,21 +21,7 @@ def test_required_fails():
     """
 
     check = required()
-    check.value = None
+    check.key = 'not_found'
+    check.value = {'test': 'Hello World'}
     assert not check.result
-    assert check.error == "Required Field: Value cannot be None or Empty"
-
-    check = required()
-    check.value = ""
-    assert not check.result
-    assert check.error == "Required Field: Value cannot be None or Empty"
-
-    check = required()
-    check.value = []
-    assert not check.result
-    assert check.error == "Required Field: Value cannot be None or Empty"
-
-    check = required()
-    check.value = {}
-    assert not check.result
-    assert check.error == "Required Field: Value cannot be None or Empty"
+    assert check.error == "Required Field: Key not found"
