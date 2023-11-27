@@ -191,7 +191,7 @@ True
 ```
 
 ## not_none
-Validates that the result is not None or if the value has a `__len__` attribute, the length is greater then `0`
+Validates that the result is not `None` and if the value has a `__len__` atribute, the length is not 0.
 
 Use:
 ```python
@@ -201,7 +201,7 @@ Use:
 >>> r.value = None
 >>> r.result
 False
->>> r.value = ''
+>>> r.value = []
 >>> r.result
 False
 >>> r.value = 0
@@ -233,6 +233,23 @@ True
 ```
 
 ## required
+required will validate that the field exists in the payload.
+
+Use:
+```python
+>>> from api_toolkit.validate import Rules as r
+>>>
+>>> test_dict = {
+    'test': 'Hello World!'
+}
+>>> required_check = r.required()
+>>> required.key = 'test'
+>>> required.value = test_dict
+>>> required.result
+True
+>>> required.key = 'not_present'
+False
+```
 
 ## custom
 *Note* custom rule can not be set using the string method of setting up a RuleSet.
