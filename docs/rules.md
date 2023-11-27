@@ -164,6 +164,31 @@ True
 ```
 
 ## no_emoji
+`no_emoji` uses the `emoji.analyze` method to check if emojies are present in a string. 
+
+Use:
+```python
+>>> from api_toolkit.validate import Rules as r
+>>>
+>>> check_emoji = no_emoji(value='There is no Emoji')
+>>> check_emoji.result
+True
+>>> check_emoji.value = 'There is 😀 an emoji'
+>>> check_emoji.result
+False
+```
+
+The no_emoji rule can also be used as a callable function without instantiating it. When using this method it will return only `True` or `False` and no error message.
+
+```python
+>>> from api_toolkit.validate import Rules as r
+>>>
+>>> r.no_emoji('There is 😀 an emoji')
+False
+>>>
+>>> r.no_emoji('There is no emoji')
+True
+```
 
 ## not_none
 
