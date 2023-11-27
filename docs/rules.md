@@ -191,7 +191,23 @@ True
 ```
 
 ## not_none
+Validates that the result is not None or if the value has a `__len__` attribute, the length is greater then `0`
 
+Use:
+```python
+>>> from api_toolkit.validate import Rules as r
+>>>
+>>> none_check = r.not_none()
+>>> r.value = None
+>>> r.result
+False
+>>> r.value = ''
+>>> r.result
+False
+>>> r.value = 0
+>>> r.result
+True
+```
 ## pattern
 
 ## required
