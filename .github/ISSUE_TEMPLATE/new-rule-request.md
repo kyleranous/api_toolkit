@@ -2,7 +2,7 @@
 name: New Rule Request
 about: Use this template to request new validation rules
 title: "[RULE REQUEST]"
-labels: ''
+labels: Rule Request
 assignees: ''
 
 ---
