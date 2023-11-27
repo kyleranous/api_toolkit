@@ -1,10 +1,15 @@
 # Validate
 *api_toolkit.validate*
 
+## TOC
+
+ - [RuleSet](#ruleset)
+
+
 ## Classes
 
 ### RuleSet
-RuleSet is the primary class used in the validate module. It takes in a collection of rules mapped to keys, and a dictionary to validate. It will run each field through the validation rules and return pass if all tests succeed, and fail if any fail.
+RuleSet is the primary class used in the validate module. It takes in a collection of rules mapped to keys, and a dictionary to validate. It will run each field through the validation rules and return `True` if all tests succeed, and `False` if any fail.
 
 - [Basic Usage](#usage)
 - [Nested RuleSets](#nested-rulesets)
