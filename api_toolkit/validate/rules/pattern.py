@@ -17,6 +17,11 @@ class Pattern(Rule):
         self.message = None
         super().__init__(**kwargs)
 
+    def __call__(self, pattern: str, value: str) -> bool:
+        self.pattern = pattern
+        self.value = value
+        return self.result
+
     def check(self) -> None:
         """
         Validate that the value matches the pattern
