@@ -53,6 +53,8 @@ class RuleSet:
         """
         Setter for the test dict
         """
+        self.errors = {}
+        self.result = False
         self._test_dict = value
         self._build_unvalidated_keys()
         self._validate()
