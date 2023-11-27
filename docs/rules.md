@@ -1,5 +1,5 @@
 # Rules
-Information about specific rules. See the section on [RuleSet]() for information on using them in payloads.
+Information about specific rules. See the section on [RuleSet](validate.md#ruleset) for information on using them in payloads.
 
 
 ## Rule List
@@ -254,7 +254,7 @@ False
 ## custom
 the custom Rule allows for passing custom defined validation checks by defining a lambda or function that returns `True` or `False`. Since custom allows the execution of possibly untrusted code, it is up to the developer using the package to add checks to make sure malicious code is not being passed.
 
-*Note* custom rule can not be set using the string method of setting up a RuleSet.
+*Note* custom rule can not be set using the [string method](validate.md#defining-rules-with-a-string) of setting up a RuleSet.
 
 **Passing a lambda function to `custom`**
 ```python
