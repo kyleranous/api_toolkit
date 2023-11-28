@@ -36,6 +36,6 @@ def test_email_callable():
     """
     Test that email is callable and functions as expected
     """
-
-    assert email(value='test@test.com')
-    assert not email(value='test@test')
+    e = email()
+    assert e('test@test.com')
+    assert not e('test@test')

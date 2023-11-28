@@ -2,6 +2,8 @@
 Tests for the rule base class
 """
 
+import pytest
+
 from api_toolkit.validate.rules.rule import Rule
 
 
@@ -12,6 +14,9 @@ def test_rule_init():
     r = Rule()
     assert r.error is None
     assert not r.result
+
+    with pytest.raises(NotImplementedError):
+        r.check()
 
 
 def test_rule_custom_dunders():

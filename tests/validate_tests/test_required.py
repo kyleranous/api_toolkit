@@ -25,3 +25,13 @@ def test_required_fails():
     check.value = {'test': 'Hello World'}
     assert not check.result
     assert check.error == "Required Field: Key not found"
+
+
+def test_required_callable():
+    """
+    Test that required works as a callable function
+    """
+
+    r = required(key='key1')
+    assert r({'key1': 'value1'})
+    assert not r({'key2': 'value2'})
