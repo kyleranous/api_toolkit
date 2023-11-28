@@ -1,3 +1,7 @@
+"""
+Tests for the is_in rule
+"""
+
 from api_toolkit.validate.rules import is_in
 
 
