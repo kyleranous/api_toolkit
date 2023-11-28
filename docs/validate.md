@@ -1,6 +1,8 @@
 # Validate
 *api_toolkit.validate*
 
+The `Validate` module contains classes and functions for validating data in payloads.
+
 ## TOC
 
  - [RuleSet](#ruleset)
