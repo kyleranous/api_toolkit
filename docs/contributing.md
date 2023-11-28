@@ -28,7 +28,7 @@ class NewRule(Rule):
 5. `self.message` can be set as a placeholder in `check()` method if multiple error messages are possible.
 6. All Rule Classes require a `_build_error_message()` method that excepts no arguments other then `self`
 7. `_build_error_message()` should not return anything and set `self.error` to the error message. `Rule` base class handles the logic for calling this function if `self.result` is set to `False`
-8. Optional - Create `__call__()` method if rule should be callable. 
+8. Optional - Override `__call__` method if method in `Rule` base class won't work
 9. New Rule Class should be added to `api_toolkit.validate.rules.__init__.py` and provided an aliases that matches standard python `snake_case` UNLESS that would interfere with existing python functions (ie: `Min` / `Max` are not aliased).
 10. Add / Update Unit Tests. All Rule Tests should be placed in `tests/validate_tests/`. See [Testing Requirements](#testing-requirements)
 10. Update `docs/rules.md` with examples for the rule. Please add the rule in alphabetical order.
