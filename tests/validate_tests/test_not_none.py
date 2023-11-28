@@ -49,3 +49,15 @@ def test_non_none_invalid():
     r.value = {}
     assert not r
     assert r.error == 'Not None Error: {} is empty'
+
+
+def test_not_none_callable():
+    """
+    Test that the not_none rule works as a callable function
+    """
+    n = not_none()
+    assert n('a')
+    assert not n(None)
+    assert not n('')
+    assert not n([])
+    assert not n({})

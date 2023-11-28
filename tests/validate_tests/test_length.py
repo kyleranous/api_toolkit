@@ -70,6 +70,6 @@ def test_length_callable():
     """
     Test that length is callable
     """
-
-    assert length(min=3, max=10, value='test')
-    assert not length(min=6, max=10, value='test')
+    l = length(min=3, max=10)
+    assert l('test')
+    assert not l('te')

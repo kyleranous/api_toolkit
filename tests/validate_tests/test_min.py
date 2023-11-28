@@ -98,3 +98,14 @@ def test_min_string_passed():
     check = Min('5.4')
     check.value = 5.5
     assert check.result
+
+
+def test_min_callable():
+    """
+    Test that Max works as a callable function
+    """
+
+    m = Min(15)
+    assert m(23)
+    assert m('Test String but LONGER!')
+    assert not m(13)
