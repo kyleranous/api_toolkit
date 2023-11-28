@@ -34,7 +34,6 @@ def test_rule_set_initialization():
     rule_set = RuleSet(validation_rules)
 
     assert not rule_set
-    assert not rule_set.result_dict
     assert not rule_set.errors
     assert not rule_set.unvalidated_keys
     assert rule_set.test_dict is None

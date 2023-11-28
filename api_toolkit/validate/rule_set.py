@@ -16,7 +16,6 @@ class RuleSet:
     def __init__(self, validation_dict: dict, **kwargs) -> None:
         self.validation_dict = validation_dict
         self.result = False
-        self.result_dict = {}
         self.errors = {}
         self.unvalidated_keys = []
         self._test_dict = None

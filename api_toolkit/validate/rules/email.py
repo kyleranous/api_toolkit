@@ -24,7 +24,7 @@ class Email(Rule):
             self.message = f'Email Error: {self.value} is not a valid email'
             self.result = False
         else:
-            self.message = None
+            #self.message = None
             self.result = True
 
     def _build_error_message(self) -> None:
