@@ -182,11 +182,11 @@ The no_emoji rule can also be used as a callable function without instantiating 
 
 ```python
 >>> from api_toolkit.validate import Rules as r
->>>
->>> r.no_emoji('There is 😀 an emoji')
+>>> n = r.no_emoji()
+>>> n('There is 😀 an emoji')
 False
 >>>
->>> r.no_emoji('There is no emoji')
+>>> n('There is no emoji')
 True
 ```
 
