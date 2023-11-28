@@ -247,7 +247,11 @@ True
 ```
 
 ### Running Rules as a function
-All Rules can be instantiated then called as a function to get a simple bool response. The example below shows how this is don using the `no_emoji` and `pattern` rules
+All Rules can be instantiated then called as a function to get a simple `bool` response. This would be usefull for creating a custom validation workflow.
+
+The example below shows how this is don using the `no_emoji` and `pattern` rules.
+
+*Note: not all rules are better used as a callable method rather then raw python for the logic, but all Rules are callable as a function ffor consistancy*
 
 ```python
 >>> from api_toolkit.validate import Rules as r
