@@ -42,3 +42,12 @@ def test_custom_with_function():
     check.value = 12
     assert not check
     assert check.error == 'Test Error Message'
+
+
+def test_custom_callable():
+    """
+    Test that the custom method works as a callable function
+    """
+    c = custom(check_function = lambda x: x >= 13)
+    assert c(15)
+    assert not c(12)

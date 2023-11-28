@@ -34,7 +34,6 @@ def test_rule_set_initialization():
     rule_set = RuleSet(validation_rules)
 
     assert not rule_set
-    assert not rule_set.result_dict
     assert not rule_set.errors
     assert not rule_set.unvalidated_keys
     assert rule_set.test_dict is None
@@ -82,6 +81,11 @@ def test_rule_set_invalid_payload():
     assert rule_set.errors is not None
     assert 'key1' in rule_set.errors
     assert 'key2' not in rule_set.errors
+    assert len(rule_set) == 1
+    assert rule_set['key1'] is not None
+    assert rule_set['key2'] == 'No errors for key2'
+    for key, _ in rule_set:
+        assert key == 'key1'
 
 
 def test_nested_rule_set_passes():

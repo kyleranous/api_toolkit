@@ -97,3 +97,14 @@ def test_max_string_passed():
     check = Max('5.4')
     check.value = 5.3
     assert check.result
+
+
+def test_max_callable():
+    """
+    Test that Max works as a callable function
+    """
+
+    m = Max(15)
+    assert m(13)
+    assert m('Test String')
+    assert not m(16)

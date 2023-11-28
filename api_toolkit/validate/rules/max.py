@@ -30,7 +30,7 @@ class Max(Rule):
             if len(self.value) > self.max:
                 self.message = f'Maximum Error: {self.value} is not <= to {self.max}'
                 self.result = False
-            else:
+            else: # If len is less then max, then the check passes
                 self.result = True
         else: # Attempt to directly compare the value to the maximum
             try:

@@ -36,14 +36,6 @@ True
 >>> bool(check_email)
 False
 ```
-The email rule can also be used as a callable function without instantiating it. When using this method it will return only `True` or `False` and no error message
-
-```python
-from api_toolkit.validate import Rules as r
->>>
->>> r.email(value='kranous05@gmail.com')
-True
-```
 
 Validation Fail Message:
 
@@ -82,15 +74,6 @@ Use:
 True
 ```
 
-The `is_type` rule can also be used as a callable function without instantiating it. When using this method it will return only `True` or `False` and no error message
-
-```python
-from api_toolkit.validate import Rules as r
->>>
->>> r.is_type(str, int, value='1')
-True
-```
-
 Validation Fail Message:
 
 `Type Error: Expected type [LIST OF TYPES] got [VALUE TYPE]`
@@ -118,16 +101,6 @@ False
 "Length Error: USA is not between 2 and 2
 >>> length_check,value = 'US'
 >>> length_check.result
-True
-```
-
-The length rule can also be used as a callable function without instantiating it. When using this method it will return only `True` or `False` and no error message.
-
-```python
->>> from api_toolkit.validate import Rules as r
->>>
->>> test_array = [1, 2, 3, 4, 5]
->>> r.length(min=3, max=6, value=test_array)
 True
 ```
 
@@ -178,18 +151,6 @@ True
 False
 ```
 
-The no_emoji rule can also be used as a callable function without instantiating it. When using this method it will return only `True` or `False` and no error message.
-
-```python
->>> from api_toolkit.validate import Rules as r
->>>
->>> r.no_emoji('There is 😀 an emoji')
-False
->>>
->>> r.no_emoji('There is no emoji')
-True
-```
-
 ## not_none
 Validates that the result is not `None` and if the value has a `__len__` atribute, the length is not 0.
 
@@ -221,14 +182,6 @@ Use:
 False
 >>> pattern.value = 'test'
 >>> pattern.result
-True
-```
-The pattern rule can also be used as a callable function without instantiating it. When using this method it will return only `True` or `False` and no error message.
-
-```python
->>> from api_toolkit.validate import Rules as r
->>>
->>> r.pattern(pattern=r'^[a-z]+$', value = 'test')
 True
 ```
 
@@ -291,4 +244,27 @@ False
 >>> # Check the result
 >>> custom_check.result
 True
+```
+
+### Running Rules as a function
+All Rules can be instantiated then called as a function to get a simple `bool` response. This would be usefull for creating a custom validation workflow, or to avoid spending resources on a complete payload validation when any field fails.
+
+The example below shows how this is don using the `no_emoji` and `pattern` rules.
+
+*Note: not all rules are better used as a callable method rather then raw python for the logic, but all Rules are callable as a function ffor consistancy*
+
+```python
+>>> from api_toolkit.validate import Rules as r
+>>> n = r.no_emoji()
+>>> n('There is 😀 an emoji')
+False
+>>>
+>>> n('There is no emoji')
+True
+>>>
+>>> p = r.pattern(r'^[a-z]+$')
+>>> p('test')
+True
+>>> p('TEST')
+False
 ```

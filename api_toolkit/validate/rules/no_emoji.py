@@ -16,13 +16,6 @@ class NoEmoji(Rule):
         self.message = None
         super().__init__(**kwargs)
 
-    def __call__(self, value: str) -> bool:
-        """
-        Validate that the value has no Emoji's in it
-        """
-        self.value = value
-        return self.result
-
     def check(self) -> None:
         """
         Validate that the value has no Emoji's in it
@@ -32,7 +25,7 @@ class NoEmoji(Rule):
             self.message = f"No Emoji Error: {self.value} has Emoji's in it"
             self.result = False
         else:
-            self.message = None
+            #self.message = None
             self.result = True
 
     def _build_error_message(self) -> None:

@@ -53,6 +53,7 @@ def test_is_type_callable():
     """
     Test that is_type can be called as a function
     """
-
-    assert is_type(int, float, value=1)
-    assert not is_type(int, float, value='1')
+    i = is_type(int, float)
+    assert i(1)
+    assert i(1.2)
+    assert not i('1.2')

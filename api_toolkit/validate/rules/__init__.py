@@ -1,3 +1,6 @@
+"""
+This is the rules module for the validate module
+"""
 from .is_type import IsType as is_type
 from .is_in import IsIn as is_in
 from .required import Required as required

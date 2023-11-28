@@ -29,7 +29,7 @@ class Min(Rule):
             if len(self.value) < self.min:
                 self.message = f'Minimum Error: {self.value} is not >= to {self.min}'
                 self.result = False
-            else:
+            else: # If len is greater then or equal to min, then the check passes
                 self.result = True
         else: # Attempt to directly compare the value to the minimum
             try:

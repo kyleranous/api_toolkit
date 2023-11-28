@@ -39,6 +39,6 @@ def test_pattern_callable():
     """
     Test that pattern rule works when called as a function
     """
-
-    assert pattern(pattern=r'^[a-z]+$', value='test')
-    assert not pattern(pattern=r'^[0-9]+$', value='test')
+    p = pattern(pattern=r'^[a-z]+$')
+    assert p('test')
+    assert not p('TEST')
