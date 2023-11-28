@@ -228,8 +228,11 @@ The pattern rule can also be used as a callable function without instantiating i
 ```python
 >>> from api_toolkit.validate import Rules as r
 >>>
->>> r.pattern(pattern=r'^[a-z]+$', value = 'test')
+>>> p = r.pattern(pattern=r'^[a-z]+$')
+>>> p('test')
 True
+>>> p('TEST')
+False
 ```
 
 ## required
