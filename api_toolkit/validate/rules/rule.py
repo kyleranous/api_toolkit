@@ -23,6 +23,13 @@ class Rule:
 
         return self.error
 
+    def __call__(self, value) -> bool:
+        """
+        Sets the value of the rule and runs the check
+        """
+        self.value = value
+        return self.result
+
     def check(self) -> None:
         """
         Extended classes will implement this method to check the specific rule.

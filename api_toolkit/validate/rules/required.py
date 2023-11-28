@@ -13,15 +13,16 @@ class Required(Rule):
     def __init__(self, **kwargs) -> None:
         self._key = None
         self.message = None
+        super().__init__(**kwargs)
         if 'key' in kwargs:
             self.key = kwargs.get('key')
-        super().__init__(**kwargs)
 
     def check(self):
         """
         Validate that the value is not None or empty
         """
-        self.result = self.key in self.value
+        if self.key is not None and self.value is not None:
+            self.result = self.key in self.value
 
     def _build_error_message(self) -> None:
         """
@@ -42,5 +43,4 @@ class Required(Rule):
         Sets the key to check
         """
         self._key = value
-        if self._key is not None and self.value is not None:
-            self.check()
+        self.check()

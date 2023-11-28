@@ -15,10 +15,6 @@ class Email(Rule):
         self.message = None
         super().__init__(**kwargs)
 
-    def __call__(self, value: str) -> bool:
-        self.value = value
-        return self.result
-
     def check(self) -> None:
         """
         Validate that the value is formatted properly as an email

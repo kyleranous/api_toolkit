@@ -17,19 +17,6 @@ class IsType(Rule):
         self._check_type_list_for_strings()
         super().__init__(**kwargs)
 
-    def __call__(self, *args, value) -> bool:
-        """
-        Check if the passed value is of the allowed type
-        """
-        # Check if the value is of an allowed type and set the result
-        self.type_list = args
-        # Check if the type_list has strings
-        self._check_type_list_for_strings()
-
-        self.value = value
-
-        return self.result
-
     def check(self):
         """
         Check if the passed value is of the allowed type
