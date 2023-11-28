@@ -247,7 +247,7 @@ True
 ```
 
 ### Running Rules as a function
-All Rules can be instantiated then called as a function to get a simple `bool` response. This would be usefull for creating a custom validation workflow.
+All Rules can be instantiated then called as a function to get a simple `bool` response. This would be usefull for creating a custom validation workflow, or to avoid spending resources on a complete payload validation when any field fails.
 
 The example below shows how this is don using the `no_emoji` and `pattern` rules.
 
