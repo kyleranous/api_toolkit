@@ -28,6 +28,6 @@ def test_no_emoji_callable():
     """
     Test that no_emoji functions as expected when called as a function
     """
-
-    assert no_emoji(value='test')
-    assert not no_emoji(value='test😀')
+    n = no_emoji()
+    assert n('test')
+    assert not n('test😀')
