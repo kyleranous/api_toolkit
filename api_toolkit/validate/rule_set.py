@@ -4,7 +4,6 @@ Ruleset Class Module
 from __future__ import annotations
 
 import inspect
-import json
 
 from . import Rules as r
 
