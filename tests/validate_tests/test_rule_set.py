@@ -227,3 +227,49 @@ def test_rule_set_with_string():
 
     rule_set.test_dict = test_dict3
     assert rule_set
+
+
+def test_rule_set_with_iter_rule_list():
+    """
+    Test that a ruleset with iter rules will work as expected
+    """
+
+    test_dict = {
+        'key1': [1, 2, 3, 4, 5]
+    }
+
+    validation_dict = {
+        'key1': [r.is_type(list), [r.is_type(int)]]
+    }
+
+    rule_set = RuleSet(validation_dict, test_dict=test_dict)
+
+    assert bool(rule_set)
+    assert not rule_set.errors
+
+def test_rule_set_with_iter_rule_dict():
+    """
+    Test that a ruleset with iter rules will work as expected with a dict
+    """
+
+    test_dict = {
+        'key1': [
+            {
+                'key1_1': 'Sub key 1',
+                'key1_2': 'Sub key 2'
+            },
+            {
+                'key2_1': 'Sub Key 2',
+                'key2_2': 'Sub Key 2'
+            }
+        ]
+    }
+
+    validation_dict = {
+        'key1': [r.is_type(list), [r.is_type(dict)]]
+    }
+
+    rule_set = RuleSet(validation_dict, test_dict=test_dict)
+
+    assert bool(rule_set)
+    assert not bool(rule_set.errors)

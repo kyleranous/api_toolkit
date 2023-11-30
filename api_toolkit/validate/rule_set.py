@@ -99,6 +99,11 @@ class RuleSet:
         # Loop through each rule in the rules list
         field_errors = []
         for rule in rules:
+            # Check if the rule is a list
+            if isinstance(rule, list):
+                # If it is, pass it to the _iter_rule method
+                field_errors = self._iter_rule(rule, value)
+                continue
             # Pass the entire test dict to value if using the Required Rule
             if type(rule).__name__ == 'Required':
                 rule.key = key
@@ -171,3 +176,29 @@ class RuleSet:
             rule_list.append(rule(*args, **kwargs))
 
         return rule_list
+
+    def _iter_rule(self, rule_list, value) -> dict:
+        """
+        Takes in a list of rules or RuleSet objects and the value of a key,
+        Checks that the value of the key is iterable then runs each item through each test.
+        """
+        print(rule_list)
+        print(value)
+        
+        # Check if the value is iterable
+        if not isinstance(value, (list, tuple, dict)):
+            raise TypeError(f'{value} is not iterable')
+
+        # If the value is a list or dict, loop through each item
+        if isinstance(value, (list, tuple)):
+            value_errors = {}
+            for index, item in enumerate(value):
+                item_errors = []
+                for rule in rule_list:
+                    rule.value = item
+                    if not rule.result:
+                        item_errors.append(rule.error)
+                if item_errors:
+                    value_errors[str(index)] = item_errors
+        print(value_errors)
+        return value_errors
