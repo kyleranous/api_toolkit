@@ -4,6 +4,7 @@ Ruleset Class Module
 from __future__ import annotations
 
 import inspect
+import json
 
 from . import Rules as r
 
@@ -55,6 +56,7 @@ class RuleSet:
         self.errors = {}
         self.result = False
         self._test_dict = value
+        print(json.dumps(self._test_dict, indent=4))
         self._build_unvalidated_keys()
         self._validate()
 
@@ -81,10 +83,13 @@ class RuleSet:
         """
         Get the key from the test dict and run it through the rules
         """
+        print(f'Validating Key: {key}')
         # If a RuleSet is passed to the argument, evaluate the ruleset
         if isinstance(rules, RuleSet):
             # Get the Value to be tested
             value = self.test_dict.get(key)
+
+            print(f'Ruleset passed for: {value}')
             # Pass the value to the ruleset
             rules.test_dict = value
 
@@ -100,10 +105,31 @@ class RuleSet:
         field_errors = []
         for rule in rules:
             # Check if the rule is a list
+            print('Checking if rule is a list')
             if isinstance(rule, list):
+                print('Rule is a list')
                 # If it is, pass it to the _iter_rule method
-                field_errors = self._iter_rule(rule, value)
+                iter_errors = self._iter_rule(rule, value)
+                if iter_errors:
+                    # If there are errors, add them to the field_errors list
+                    field_errors.append(iter_errors)
                 continue
+            print('Checking if rule is a RuleSet')
+            if isinstance(rule, RuleSet):
+                # Get the Value to be tested
+                value = self.test_dict.get(key)
+
+                print(f'Parsing Rule Set for: {value}')
+                # Pass the value to the ruleset
+                rule.test_dict = value
+                print(f'Checking for Errors')
+                # Check if any errors were found
+                if rule.errors:
+                    # Add the errors to the errors dict
+                    self.errors[key] = rule.errors
+                continue
+
+            print(f'Validating Rule: {type(rule).__name__}')
             # Pass the entire test dict to value if using the Required Rule
             if type(rule).__name__ == 'Required':
                 rule.key = key
@@ -179,26 +205,22 @@ class RuleSet:
 
     def _iter_rule(self, rule_list, value) -> dict:
         """
-        Takes in a list of rules or RuleSet objects and the value of a key,
-        Checks that the value of the key is iterable then runs each item through each test.
+        Takes in the rule list and value, converts value to a dict if needed
+        builds a new validation dict, and creates a new RuleSet for validation
         """
-        print(rule_list)
-        print(value)
-        
-        # Check if the value is iterable
-        if not isinstance(value, (list, tuple, dict)):
-            raise TypeError(f'{value} is not iterable')
+        print('Parsing Rule List')
+        # Convert value to a dict if needed
+        if not isinstance(value, dict):
+            # Unpack the list into a dictionary with the index as the key
+            value = {k: v for k, v in enumerate(value)}
 
-        # If the value is a list or dict, loop through each item
-        if isinstance(value, (list, tuple)):
-            value_errors = {}
-            for index, item in enumerate(value):
-                item_errors = []
-                for rule in rule_list:
-                    rule.value = item
-                    if not rule.result:
-                        item_errors.append(rule.error)
-                if item_errors:
-                    value_errors[str(index)] = item_errors
-        print(value_errors)
-        return value_errors
+        # Build a new validation dict
+        validation_dict = {}
+        for key in value:
+            validation_dict[key] = rule_list
+
+        # Create a new RuleSet for validation
+        ruleset = RuleSet(validation_dict, test_dict=value)
+
+        # Return the errors
+        return ruleset.errors if ruleset.errors else None

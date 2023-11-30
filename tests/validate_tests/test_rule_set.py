@@ -247,6 +247,13 @@ def test_rule_set_with_iter_rule_list():
     assert bool(rule_set)
     assert not rule_set.errors
 
+    # Test that it will fail
+    test_dict['key1'] = [1, 2, 3, 4, '5']
+    rule_set.test_dict = test_dict
+
+    assert not bool(rule_set)
+    assert len(rule_set.errors) == 1
+
 def test_rule_set_with_iter_rule_dict():
     """
     Test that a ruleset with iter rules will work as expected with a dict
@@ -266,7 +273,57 @@ def test_rule_set_with_iter_rule_dict():
     }
 
     validation_dict = {
-        'key1': [r.is_type(list), [r.is_type(dict)]]
+        'key1': [r.is_type(list), [r.is_type(dict), [r.is_type(str)]]]
+    }
+
+    rule_set = RuleSet(validation_dict, test_dict=test_dict)
+
+    assert bool(rule_set)
+    assert not bool(rule_set.errors)
+
+    test_dict = {
+        'key1': [
+            {
+                'key1_1': 'Sub key 1',
+                'key1_2': True
+            },
+            {
+                'key2_1': 'Sub Key 2',
+                'key2_2': False
+            }
+        ]
+    }
+
+    rule_set.test_dict = test_dict
+    assert not bool(rule_set)
+    assert len(rule_set.errors) == 1
+
+def test_iter_rules_with_nested_ruleset():
+    """
+    Test that a ruleset with iter rules will work if a nested ruleset is passed
+    """
+    test_dict = {
+        'key1': [
+            {
+                'name': 'Test Value 1',
+                'value': 100
+            },
+            {
+                'name': 'Test Value 2',
+                'value': 50
+            }
+        ]
+    }
+
+    key_1_rules = {
+        'name': [r.is_type(str)],
+        'value': [r.is_type(int), r.Min(25)]
+    }
+
+    nested_rule_set = RuleSet(key_1_rules)
+
+    validation_dict = {
+        'key1': [r.is_type(list), [nested_rule_set]]
     }
 
     rule_set = RuleSet(validation_dict, test_dict=test_dict)
