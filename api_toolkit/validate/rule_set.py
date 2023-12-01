@@ -193,7 +193,7 @@ class RuleSet:
         # Convert value to a dict if needed
         if not isinstance(value, dict):
             # Unpack the list into a dictionary with the index as the key
-            value = {k: v for k, v in enumerate(value)}
+            value = dict(enumerate(value))
 
         # Build a new validation dict
         validation_dict = {}
