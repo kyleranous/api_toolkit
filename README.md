@@ -2,6 +2,8 @@
 
 A collection of tools for creating APIs and API Connectors
 
+Current Version: `0.2.0`
+
 ### Installation
 
 Can be installed with pip:
