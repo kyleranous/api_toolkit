@@ -159,3 +159,128 @@ False
 >>> rule_set.errors
 {'key2': ['Required Field: Key not found', 'Type Error: Expected type str got NoneType', 'Attribute Error: None does not have a length']}
 ```
+
+### Validating Lists and Dictionaries Iterably
+Rules and RuleSets can be validated on iterable objects. The rules passed to the key will be run on each element in the list or dictionary. These rules can be defined individually or with a rule set. 
+Iterable validation should only be used when each element structure is expected to be the same.
+Iterable rules are defined by placing them in a sublist in the rule list:
+ex:
+```
+{
+    'key1': [r.is_type(list), [r.is_type(int), r.Min(12)]]
+}
+```
+In this example, `r.is_type(list)` will be run against the entire value for `key1`, and `[r.is_type(int), r.Min(12)]` will be run against each element in the list.
+
+There is no limit to the levels of nesting iterable rules, but to keep the code readable and aid in troubleshooting it is reccomended to not nest to many iterable rules. Consider breaking elements out of payloads and validating them seperately if they are complex.
+
+Below are 3 examples where this could be used:
+
+#### Validating a list of items
+```python
+>>> from api_toolkit.validate import RuleSet
+>>> from api_toolkit.validate import Rules as r
+>>>
+>>> # Generate a dictionary to be tested
+>>> test_dict = {
+...     'key1': [1, 3, 14, 13.5]
+... }
+>>>
+>>> # Build the validation Dict
+>>> # This is check that key1 is a list and that each element in the list
+>>> # is an integer
+>>> valid_dict = {
+...     'key1': [r.is_type(list), [r.is_type(int)]]
+... }
+>>> rule_set = RuleSet(valid_dict, test_dict=test_dict)
+>>>
+>>> bool(rule_set)
+True
+```
+
+#### Validating a list of dictionaries
+```python
+>>> from api_toolkit.validate import RuleSet
+>>> from api_toolkit.validate import Rules as r
+>>>
+>>> # Build the test dict
+>>> test_dict = {
+...     'key1': [
+...         {
+...             'name': 'Property 1',
+...             'value': 134
+...         },
+...         {
+...             'name': 'Property 2',
+...             'value': True
+...         },
+...         {
+...             'name': 'Property 3',
+...             'value': 'exempt'
+...         }
+...     ] 
+... }
+>>>
+>>> # Build the RuleSet for dictionaries in key1 list
+>>> sub_rule_dict = {
+...     'name': [r.required(), r.is_type(str), r.length(min=3)],
+...     'value': [r.required()]
+...}
+>>> sub_rule_set = RuleSet(sub_rule_dict)
+>>>
+>>> # Build the full RuleSet
+>>> validation_dict = {
+...    'key1': [[sub_rule_set]]
+...}
+>>> rule_set = RuleSet(validation_dict, test_dict=test_dict)
+>>> bool(rule_set)
+True
+```
+
+#### Validating a dictionary of dictionaries
+This can be useful if validating a dictionary where keys may be customized but the value of the keys is testable.
+```python
+>>> from api_toolkit.validate import RuleSet
+>>> from api_toolkit.validate import Rules as r
+>>>
+>>> # Build test dict
+>>> test_dict = {
+...     'key1': {
+...         'property_1': {
+...             'value': 100
+...         },
+...         'property_2': {
+...             'value': 150
+...         }
+...     }
+... }
+>>>
+>>> # Build the Rule Set for the key1 dictionaries
+>>> key1_valid_dict = {
+...     'value': [is_type(int)]
+... }
+>>> key1_rule_set = RuleSet(key1_valid_dict)
+>>> 
+>>> # Build the Rule Set for the test dictionary
+>>> validation_dict = {
+...     'key1': [[key1_valid_dict]]
+... }
+>>> rule_set = RuleSet(validation_dict, test_dict=test_dict)
+>>>
+>>> bool(rule_set)
+True
+```
+
+#### Error Structure
+If an error is found in validation of a list, the error dictionary will report the error with the index position of the element that failed as the key
+```json
+{
+    "key2": [
+        {
+            "2": [ //This is the index position of the element with the error
+                "Type Error: Expected type int got str"
+            ]
+        }
+    ]
+}
+```

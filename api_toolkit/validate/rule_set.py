@@ -66,9 +66,15 @@ class RuleSet:
         self.errors = {}
         # Loop through each key and value in the validation dict
         for key, rules in self.validation_dict.items():
-            # Pass the rule list and the value to the _validate_key method
+            # If rules is a ruleset, cast it into a list and continue processing
+            if isinstance(rules, RuleSet):
+                rules = [rules]
+
+            # If rules is a string, parse it into a list of rules
             if isinstance(rules, str):
                 rules = self.parse_rule_string(rules)
+
+            # Validate the key of the list of rules
             self._validate_key(key, rules)
 
         # If there are any errors, set result to false
@@ -81,24 +87,31 @@ class RuleSet:
         """
         Get the key from the test dict and run it through the rules
         """
-        # If a RuleSet is passed to the argument, evaluate the ruleset
-        if isinstance(rules, RuleSet):
-            # Get the Value to be tested
-            value = self.test_dict.get(key)
-            # Pass the value to the ruleset
-            rules.test_dict = value
-
-            # Check if any errors were found
-            if rules.errors:
-                # Add the errors to the errors dict
-                self.errors[key] = rules.errors
-            return
-
         # Get the value from the test dict
         value = self.test_dict.get(key)
         # Loop through each rule in the rules list
         field_errors = []
         for rule in rules:
+            # Check if the rule is a list
+            if isinstance(rule, list):
+                # If it is, pass it to the _iter_rule method
+                iter_errors = self._iter_rule(rule, value)
+                if iter_errors:
+                    # If there are errors, add them to the field_errors list
+                    field_errors.append(iter_errors)
+                continue
+            if isinstance(rule, RuleSet):
+                # Get the Value to be tested
+                value = self.test_dict.get(key)
+
+                # Pass the value to the ruleset
+                rule.test_dict = value
+                # Check if any errors were found
+                if rule.errors:
+                    # Add the errors to the errors dict
+                    self.errors[key] = rule.errors
+                continue
+
             # Pass the entire test dict to value if using the Required Rule
             if type(rule).__name__ == 'Required':
                 rule.key = key
@@ -171,3 +184,24 @@ class RuleSet:
             rule_list.append(rule(*args, **kwargs))
 
         return rule_list
+
+    def _iter_rule(self, rule_list, value) -> dict:
+        """
+        Takes in the rule list and value, converts value to a dict if needed
+        builds a new validation dict, and creates a new RuleSet for validation
+        """
+        # Convert value to a dict if needed
+        if not isinstance(value, dict):
+            # Unpack the list into a dictionary with the index as the key
+            value = {k: v for k, v in enumerate(value)}
+
+        # Build a new validation dict
+        validation_dict = {}
+        for key in value:
+            validation_dict[key] = rule_list
+
+        # Create a new RuleSet for validation
+        ruleset = RuleSet(validation_dict, test_dict=value)
+
+        # Return the errors
+        return ruleset.errors if ruleset.errors else None
