@@ -20,7 +20,6 @@ RuleSet is the primary class used in the validate module. It takes in a collecti
 #### Attributes
  - result - *bool* - True if all rules on all fields have passed, otherwise False
  - errors - *dict* - Generated for any rule tests that fail. Contains the keys that failed and the error message
- - unvalidated_keys - *list* - List of keys in the test_dict that are not validated. 
 
 See [Rules](rules.md) for information on specific rules
 
@@ -62,8 +61,6 @@ A validation dictionary can be passed with multiple keys to test
 True
 >>> rule_set.errors
 {}
->>> rule_set.unvalidated_keys
-['key3']
 ```
 
 When validation fails:
