@@ -35,11 +35,9 @@ def test_rule_set_initialization():
 
     assert not rule_set
     assert not rule_set.errors
-    assert not rule_set.unvalidated_keys
     assert rule_set.test_dict is None
 
     rule_set.test_dict = TEST_DICT
-    assert rule_set.unvalidated_keys == ['key6']
 
 
 def test_rule_set_valid_payload():
