@@ -4,6 +4,7 @@ Ruleset Class Module
 from __future__ import annotations
 
 import inspect
+from typing import Union
 
 from . import Rules as r
 
@@ -83,7 +84,7 @@ class RuleSet:
         else:
             self.result = True
 
-    def _validate_key(self, key: str, rules: list | str | RuleSet) -> None:
+    def _validate_key(self, key: str, rules: Union[list, str, RuleSet]) -> None:
         """
         Get the key from the test dict and run it through the rules
         """
