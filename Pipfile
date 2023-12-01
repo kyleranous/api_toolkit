@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 emoji = "*"
+requests = "*"
 
 [dev-packages]
 pytest = "*"
