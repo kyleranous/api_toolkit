@@ -18,7 +18,6 @@ class RuleSet:
         self.validation_dict = validation_dict
         self.result = False
         self.errors = {}
-        self.unvalidated_keys = []
         self._test_dict = None
         self._rule_dict = self._build_rule_dict()
 
@@ -56,7 +55,6 @@ class RuleSet:
         self.errors = {}
         self.result = False
         self._test_dict = value
-        self._build_unvalidated_keys()
         self._validate()
 
     def _validate(self) -> None:
@@ -127,21 +125,6 @@ class RuleSet:
         if field_errors:
             # Add the field_errors list to the errors dict
             self.errors[key] = field_errors
-
-    def _build_unvalidated_keys(self) -> None:
-        """
-        Build a list of keys from the test dict that are not included in the validation dict
-        """
-        # Reset unvalidated_keys
-        self.unvalidated_keys = []
-        # Validate that a test dict has been passed
-        if self.test_dict is not None:
-            # Loop through each key in the test dict
-            # and check if it exists in the validation dict
-            for key in self.test_dict.keys():
-                if key not in self.validation_dict.keys():
-                    self.unvalidated_keys.append(key)
-
 
     def _build_rule_dict(self) -> None:
         """
