@@ -5,11 +5,13 @@ name = "pypi"
 
 [packages]
 emoji = "*"
+requests = "*"
 
 [dev-packages]
 pytest = "*"
 coverage = "*"
 pylint = "*"
+pytest-mock = "*"
 
 [requires]
 python_version = "3.10"
