@@ -46,7 +46,7 @@ Versioning is done by `[MAJOR]-[Minor]-[patch]`:
 The following rules must be followed for all new Features or Bug Fixes
 - All Unit Tests must pass. Including existing tests
 - Tests must have a minimum 90% Code Coverage for each module. This is calculated using `coverage`
-```batch
+```bash
 $ coverage run -m pytest
 ...
 $ coverage report
