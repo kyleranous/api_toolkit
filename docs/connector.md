@@ -120,4 +120,8 @@ If the backoff factor is set to `2` and max retries is set to `5`:
 | 4            | 2*2^(3-1)   | 8             |
 | 5            | 2*2^(4-2)   | 16            |
 
-If all retry attempts were attempted, this would take 31 seconds, PLUS the response time for each of the 6 Total requests being made. Keep this in mind when configuring retry settings.
+If it took 5 seconds for each request to get a response back from the server the total time the request would take is:
+```
+5s + 1s + 5s + 2s + 5s + 4s + 5s + 8s + 5s + 16s + 5s = 61s
+```
+Keep this in mind when configuring retry settings.
