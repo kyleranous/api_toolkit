@@ -18,6 +18,9 @@ It can then be imported into your project with:
 import api_toolkit
 ```
 
+### Usage
+See the package [Documentation](docs/api_toolkit.md) for useage instructions.
+
 ## Running the Tests
 
 This package uses pytest. To run the tests and evaluate coverage:
@@ -30,6 +33,7 @@ This package uses pytest. To run the tests and evaluate coverage:
 
 * [Python3.10](https://www.python.org/downloads/release/python-3100/) - Language
 * [emoji](https://pypi.org/project/emoji/)
+* [requests](https://requests.readthedocs.io/en/stable/)
 
 ## Contributing
 

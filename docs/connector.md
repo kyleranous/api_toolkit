@@ -16,8 +16,8 @@ The 'Connector `module` contains classes and functions for building API Connecto
 `APIConnector` Handles the management of a `requests.Session` object ([Documentation](https://requests.readthedocs.io/en/latest/user/advanced/)) and generates handlers for dealing with automated retries.
 
 #### Attributes
- - max_retries - *int* - The maximum number of times a request should retry. <br>Default is `0`
- - backoff_factor - *int* or *float* - The factor used to calculate time between retries see [Backoff Factor](#backoff-factor). <br>Default is `1`
+ - max_retries - *int* - The maximum number of times a request should retry. <br>Default: `0`
+ - backoff_factor - *int* or *float* - The factor used to calculate time between retries see [Backoff Factor](#backoff-factor). <br>Default: `1`
  - status_forcelist - *list[int]* - List of HTTP Status codes to retry on. <br>Default Statuses:
    - 408
    - 413
@@ -40,7 +40,7 @@ The 'Connector `module` contains classes and functions for building API Connecto
    - POST
    - PATCH
  - raise_on_status - *bool* - Automatically raise an error for unsucessful responses from an endpoint.<br>
- Default is `False`
+ Default: `False`
 
 #### Use
 APIConnector should be extended when writing a base class. In the new class, except `**kwargs` and pass them to `super().__init__(**kwargs)`
@@ -57,7 +57,7 @@ class CustomConnector(APIConnector):
     def get_google(self):
         return self.session.get('https://www.google.com')
 ```
-Alternatively if default retry settings that are differen't from the `APIConnector` base class defaults, a new dictionary with those defaults can be passed.
+Alternatively if default retry settings that are different from the `APIConnector` base class defaults are desired, a new dictionary with those defaults can be passed.
 
 ```python
 from api_toolkit.connector import APIConnector
@@ -78,9 +78,46 @@ class CustomConnector(APIConnector):
     ...
 ```
 
+#### Methods
+##### get_retry_settings
+Returns a dictionary of the current retry settings. 
+
+```python
+>>> from api_toolkit.connection import APIConnector
+>>>
+>>> a = APIConnector()
+>>>
+>>> a.get_retry_settings()
+{'max_retries': 0, 'backoff_factor': 1, 'status_forcelist': [408, 413, 429, 500, 502, 503, 504, 521, 522, 524], 'allowed_methods': ['HEAD', 'GET', 'PUT', 'DELETE', 'OPTIONS', 'TRACE', 'POST', 'PATCH'], 'raise_on_status': False}
+```
+
+##### set_retry_settings
+Allows setting some/all the retry settings with a single call.
+
+```python
+...
+>>> new_settings = {
+...     'max_retries': 0,
+...     'backoff_factor': 1,
+...     'status_forcelist': [500],
+...     'allowed_methods': ['PUT'],
+...     'raise_on_status': False
+... }
+>>> a.set_retry_settings(**new_settings)
+```
 
 #### Backoff Factor
-Retry Algorithm
+The Backoff Factor is used to calculate the time between retries in seconds. 
 ```
-[BACKOFF_FACTOR] * (2 ** ([NUMBER_OF_RETRIES] - 1))
+backoff_factor * (2 ** (number_of_retries - 1))
 ```
+If the backoff factor is set to `2` and max retries is set to `5`:
+| Retry Number | Calculation | Delay Time(s) |
+| :----------: | :---------: | :-----------: |
+| 1            | 2*2^(0-1)   | 1             |
+| 2            | 2*2^(1-1)   | 2             |
+| 3            | 2*2^(2-1)   | 4             |
+| 4            | 2*2^(3-1)   | 8             |
+| 5            | 2*2^(4-2)   | 16            |
+
+If all retry attempts were attempted, this would take 31 seconds, PLUS the response time for each of the 6 Total requests being made. Keep this in mind when configuring retry settings.
