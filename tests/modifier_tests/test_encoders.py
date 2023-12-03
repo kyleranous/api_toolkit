@@ -26,3 +26,11 @@ def test_base64_decode():
     assert m.base64_decode(b"SGVsbG8gV29ybGQ=") == "Hello World"
     assert m.base64_decode(b"SGVsbG8gV29ybGQh") == "Hello World!"
     assert m.base64_decode(b"SGVsbG8gV29ybGQhIQ==") == "Hello World!!"
+
+
+def test_url_encode():
+    """
+    Tests that url_encode will properly encode strings
+    """
+
+    assert m.url_encode("Hello, World!") == "Hello%2C%20World%21"
