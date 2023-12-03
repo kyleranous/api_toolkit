@@ -28,3 +28,13 @@ Function takes in a string or byte array and returns a Base64 decoded string
 'Goodbye World!'
 >>> 
 ```
+
+#### url_encode
+Function takes in a string and will return a URL encoded string
+
+```python
+>>> from api_toolkit import modifiers as m
+>>>
+>>> m.url_encode('Hello, World!')
+"Hello%2C%20World%21"
+```
