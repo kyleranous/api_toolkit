@@ -34,3 +34,23 @@ def test_url_encode():
     """
 
     assert m.url_encode("Hello, World!") == "Hello%2C%20World%21"
+
+
+def test_string_to_num():
+    """
+    Test that string_to_num will accurately convert strings to numbers
+    """
+
+    assert m.string_to_num("123") == 123
+    assert m.string_to_num("123.456") == 123.456
+    assert m.string_to_num("123,456") == 123456
+    assert m.string_to_num("123,456.789") == 123456.789
+    assert m.string_to_num("$123.45") == 123.45
+    assert m.string_to_num("€123.45") == 123.45
+    assert m.string_to_num("£123.45") == 123.45
+    assert m.string_to_num("¥123.45") == 123.45
+    assert m.string_to_num("₹123.45") == 123.45
+    assert m.string_to_num("1,234") == 1234
+    assert m.string_to_num("1,234.56") == 1234.56
+    assert m.string_to_num("1.234", decimal_seperator=',') == 1234
+    assert m.string_to_num("1.234,567", decimal_seperator=',') == 1234.567
