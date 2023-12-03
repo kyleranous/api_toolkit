@@ -12,9 +12,9 @@
 Function takes in a string and returns a Base64 encoded *string*.
 
 ```python
->>> from api_toolkit.modifiers import encode as e
+>>> from api_toolkit import modifiers as m
 >>> 
->>> e.base64_encode('Goodbye World!')
+>>> m.base64_encode('Goodbye World!')
 'R29vZGJ5ZSBXb3JsZCE='
 >>> 
 ```
@@ -24,7 +24,7 @@ Function takes in a string or byte array and returns a Base64 decoded string
 
 ```python
 ...
->>> e.base64_decode('R29vZGJ5ZSBXb3JsZCE=')
+>>> m.base64_decode('R29vZGJ5ZSBXb3JsZCE=')
 'Goodbye World!'
 >>> 
 ```
