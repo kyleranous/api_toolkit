@@ -67,3 +67,14 @@ def test_build_query_string():
 
     assert m.build_query_string(**query_dict) == "?key1=value1&key2=100"
     assert m.build_query_string(key1="value1", key2=100) == "?key1=value1&key2=100"
+
+
+def test_strip_emoji():
+    """
+    Test that strip_emoji will remove emojis from a string as expected
+    """
+
+    assert m.strip_emoji("Hello World") == "Hello World"
+    assert m.strip_emoji("Hello World😀") == "Hello World"
+    assert m.strip_emoji("Hello 😀 World") == "Hello World"
+    assert m.strip_emoji("Hello😀World😀") == "Hello World"
