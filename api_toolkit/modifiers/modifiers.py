@@ -34,7 +34,7 @@ def url_encode(data: str) -> str:
     """
     Takes in a string, encodes it with url encoding and returns the encoded string
     """
-    return quote(data)
+    return quote(str(data))
 
 
 def string_to_num(data: str) -> Union[int, float]:
@@ -72,3 +72,17 @@ def string_to_num(data: str) -> Union[int, float]:
         return int(symbol_stripped)
     except ValueError:
         return None
+
+
+def build_query_string(**kwargs) -> str:
+    """
+    Takes in a dictionary of key value pairs and returns a query string
+    """
+
+    query_string = "?"
+    for key, value in kwargs.items():
+        modified_key = url_encode(key)
+        modified_value = url_encode(value)
+        query_string += f"{modified_key}={modified_value}&"
+
+    return query_string[:-1]
