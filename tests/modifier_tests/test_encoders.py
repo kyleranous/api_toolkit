@@ -52,5 +52,4 @@ def test_string_to_num():
     assert m.string_to_num("₹123.45") == 123.45
     assert m.string_to_num("1,234") == 1234
     assert m.string_to_num("1,234.56") == 1234.56
-    assert m.string_to_num("1.234", decimal_seperator=',') == 1234
-    assert m.string_to_num("1.234,567", decimal_seperator=',') == 1234.567
+    assert m.string_to_num("1.234,567") == 1234.567

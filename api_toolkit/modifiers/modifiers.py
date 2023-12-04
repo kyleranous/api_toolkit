@@ -37,27 +37,38 @@ def url_encode(data: str) -> str:
     return quote(data)
 
 
-def string_to_num(data: str, **kwargs) -> Union[int, float]:
+def string_to_num(data: str) -> Union[int, float]:
     """
     Takes in a string and returns the string as an int or float if possible
     """
 
-    decimal_seperator = kwargs.get("decimal_seperator", ".")
+    #decimal_seperator = kwargs.get("decimal_seperator", ".")
 
     # Strip currency symbols from the string
     currency_symbols = "$€£¥₹₽₣₤₱₩₪₮₯₲₳₴₵₶₷₸₹₺₻₼₽₾₿"
     symbol_stripped = re.sub('[' + re.escape(currency_symbols) + ']', '', data)
 
-    if decimal_seperator == ".":
-        # Remove commas from the string
-        symbol_stripped = symbol_stripped.replace(",", "")
+    # Check if there are periods and commas in the string
+    if ',' in symbol_stripped and '.' in symbol_stripped:
+        # if '.' is before ',' then remove '.' and replace ',' with '.'
+        if symbol_stripped.find('.') < symbol_stripped.find(','):
+            symbol_stripped = symbol_stripped.replace('.', '')
+            symbol_stripped = symbol_stripped.replace(',', '.')
+        else:
+            symbol_stripped = symbol_stripped.replace(',', '')
 
-    elif decimal_seperator == ",":
-        # Remove periods from the string
-        symbol_stripped = symbol_stripped.replace(".", "")
-
-    if decimal_seperator in symbol_stripped:
-        symbol_stripped = symbol_stripped.replace(",", ".")
-        return float(symbol_stripped)
-
-    return int(symbol_stripped)
+        try:
+            return float(symbol_stripped)
+        except ValueError:
+            return None
+    if ',' in symbol_stripped:
+        symbol_stripped = symbol_stripped.replace(',', '')
+    if '.' in symbol_stripped:
+        try:
+            return float(symbol_stripped)
+        except ValueError:
+            return None
+    try:
+        return int(symbol_stripped)
+    except ValueError:
+        return None

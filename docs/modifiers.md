@@ -56,6 +56,6 @@ Currency Symbols function can detect:
 1234
 >>> m.string_to_num('1,234.56')
 1234.56
->>> m.string_to_num('1.234,56', decimal_seperator=',')
+>>> m.string_to_num('1.234,56')
 1234.56
 ```
