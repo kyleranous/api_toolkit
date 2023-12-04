@@ -54,6 +54,12 @@ def test_string_to_num():
     assert m.string_to_num("1,234.56") == 1234.56
     assert m.string_to_num("1.234,567") == 1234.567
 
+    # Test that non number values return None
+    assert m.string_to_num("Hello World") is None
+    assert m.string_to_num("Let's try this.") is None
+    assert m.string_to_num("Hello, world!") is None
+    assert m.string_to_num("Hello, world.") is None
+
 
 def test_build_query_string():
     """
