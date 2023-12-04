@@ -7,6 +7,7 @@ from typing import Union
 import re
 from urllib.parse import quote
 import base64
+import emoji
 
 
 def base64_encode(data: str) -> str:
@@ -86,3 +87,18 @@ def build_query_string(**kwargs) -> str:
         query_string += f"{modified_key}={modified_value}&"
 
     return query_string[:-1]
+
+
+def strip_emoji(text: str) -> str:
+    """
+    Takes in a string and removes any emoji characters
+    """
+    # Replace the emoji with a space
+    replaced_text = emoji.replace_emoji(text, ' ')
+
+    # Replace any triple spaces with a single space
+    replaced_text = replaced_text.replace('   ', ' ')
+    # Replace any double spaces with a single space
+    replaced_text = replaced_text.replace('  ', ' ')
+
+    return replaced_text.strip()

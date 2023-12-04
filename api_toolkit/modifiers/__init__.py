@@ -6,5 +6,6 @@ from .modifiers import (
     base64_decode,
     url_encode,
     string_to_num,
-    build_query_string
+    build_query_string,
+    strip_emoji
 )
