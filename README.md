@@ -2,7 +2,7 @@
 
 A collection of tools for creating APIs and API Connectors
 
-Current Version: `0.2.0`
+Current Version: `0.3.0`
 
 ### Installation
 
