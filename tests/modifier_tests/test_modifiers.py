@@ -53,3 +53,17 @@ def test_string_to_num():
     assert m.string_to_num("1,234") == 1234
     assert m.string_to_num("1,234.56") == 1234.56
     assert m.string_to_num("1.234,567") == 1234.567
+
+
+def test_build_query_string():
+    """
+    Test that build query string will take in a dictionary and return a valid query string
+    """
+
+    query_dict = {
+        'key1': 'value1',
+        'key2': 100
+    }
+
+    assert m.build_query_string(**query_dict) == "?key1=value1&key2=100"
+    assert m.build_query_string(key1="value1", key2=100) == "?key1=value1&key2=100"
