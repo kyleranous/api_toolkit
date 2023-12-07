@@ -88,9 +88,11 @@ class RuleSet:
         """
         # Get the value from the test dict
         value = self.test_dict.get(key)
+        print('*'*10 + str(key) + str(value) + '*'*10)
         # Loop through each rule in the rules list
         field_errors = []
         for rule in rules:
+            print(type(rule).__name__)
             # Check if the rule is a list
             if isinstance(rule, list):
                 # If it is, pass it to the _iter_rule method
@@ -102,7 +104,8 @@ class RuleSet:
             if isinstance(rule, RuleSet):
                 # Get the Value to be tested
                 value = self.test_dict.get(key)
-
+                if not value:
+                    continue
                 # Pass the value to the ruleset
                 rule.test_dict = value
                 # Check if any errors were found
@@ -116,6 +119,8 @@ class RuleSet:
                 rule.key = key
                 rule.value = self.test_dict
             else:
+                if not value:
+                    continue
                 rule.value = value
             if not rule.result: # If the rule validation fails
                 # Add the error to the field_errors list
