@@ -2,6 +2,10 @@
 Setup.py maintained for legacy systems
 """
 
+"""
+Setup.py maintained for legacy systems
+"""
+
 from setuptools import setup, find_packages
 
 
